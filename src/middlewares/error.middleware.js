@@ -23,6 +23,11 @@ export function errorHandler(error, req, res, next) {
     return responderError(res, 400, 'Los datos enviados no son válidos');
   }
 
+  // Mongoose no pudo convertir un valor (por ejemplo, un id con formato inválido)
+  if (error.name === 'CastError') {
+    return responderError(res, 400, 'El identificador enviado no es válido');
+  }
+
   // Índice único violado (por ejemplo, dos registros simultáneos con el mismo email)
   if (error.code === 11000) {
     return responderError(res, 409, 'El email ya está registrado');

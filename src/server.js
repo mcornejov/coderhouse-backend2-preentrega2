@@ -12,6 +12,7 @@ async function iniciar() {
     });
   } catch (error) {
     console.error('No fue posible iniciar el servidor:', error.message);
+    console.error('Revisa que MONGO_URL apunte a una base de datos accesible (ver .env.example).');
     process.exit(1);
   }
 }
